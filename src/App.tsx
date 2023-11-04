@@ -9,9 +9,6 @@ import React from "react";
 import { LoginContext } from "./LoginContext";
 import PageUsermanagment from "./components/PageUsermanagment";
 import { getLoginInfoFromJWT, retrieveJWT } from "./JWTManager";
-import ReactGA from 'react-ga';
-
-ReactGA.initialize("G-HB1GT2ZTZ6");
 
 function App() {
   const jwt = retrieveJWT();
