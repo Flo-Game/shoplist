@@ -9,6 +9,10 @@ import React from "react";
 import { LoginContext } from "./LoginContext";
 import PageUsermanagment from "./components/PageUsermanagment";
 import { getLoginInfoFromJWT, retrieveJWT } from "./JWTManager";
+import ReactGA from "react-ga4";
+
+const TRACKING_ID = "G-HB1GT2ZTZ6";
+ReactGA.initialize(TRACKING_ID);
 
 function App() {
   const jwt = retrieveJWT();

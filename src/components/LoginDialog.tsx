@@ -56,16 +56,10 @@ export default function LoginDialog({show, onHide}: LoginDialogProps){
                 storeJWT(jwt);
                 const loginInfo = getLoginInfoFromJWT(jwt);
                 setLoginInfo(loginInfo);
+               
                 setMessage("");
                 onHide();
                 window.location.reload();
-                /*
-                if(window.location.pathname === "/"){
-                    window.location.reload();
-                }else{
-                    navigate("/");
-                }
-                */
             }else{
                 setMessage("Login failed");
             }

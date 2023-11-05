@@ -19,6 +19,10 @@ export default function Header() {
     setShowDialog(false);
   }
 
+  function loginButtonClick(){
+    show();
+  }
+
   const doLogout = (e: React.FormEvent) => {
     e.preventDefault();
     setLoginInfo(null);
@@ -69,7 +73,7 @@ export default function Header() {
             {loginInfo ? 
             (<Button id="logoutButton" variant="success" onClick={doLogout}>Logout</Button>) 
             : 
-            (<Button id="loginButton" variant="success" onClick={show}>Login</Button>)
+            (<Button id="loginButton" variant="success" onClick={loginButtonClick}>Login</Button>)
             }
           </Nav>
         </Container>
