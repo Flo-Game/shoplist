@@ -5,6 +5,7 @@ import { ShopperResource } from "../Resources";
 import LoadingIndicator from "./LoadingIndicator";
 import { getShopper } from "../backend/shopperapi";
 import ShopListDescription from "./ShopListDescription";
+import ReactGA from "react-ga4";
 
 
 export default function PageShopper() {
@@ -22,6 +23,7 @@ export default function PageShopper() {
   }
 
   useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname + window.location.search, title: "PageShopper Site" });
     load()
   }, []);
 

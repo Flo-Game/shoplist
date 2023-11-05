@@ -6,6 +6,7 @@ import { login } from "../backend/shopperapi";
 import { getLoginInfoFromJWT, storeJWT} from "../JWTManager";
 import { useLoginContext } from "../LoginContext";
 import { createUser } from "../backend/userapi";
+import ReactGA from "react-ga4";
 
 
 interface LoginDialogProps{
@@ -53,6 +54,11 @@ export default function LoginDialog({show, onHide}: LoginDialogProps){
             console.log("Login: " + jwt);
             
             if(jwt){
+                ReactGA.event({
+                    category: "User Interaction",
+                    action: "User Login",
+                    label: `User logged in with email: ${email}`,
+                  });
                 storeJWT(jwt);
                 const loginInfo = getLoginInfoFromJWT(jwt);
                 setLoginInfo(loginInfo);
