@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LoginDialog from "./LoginDialog";
 import { useLoginContext } from "../LoginContext";
 import { removeJWT } from '../JWTManager';
+import ReactGA from "react-ga4";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -20,6 +21,11 @@ export default function Header() {
   }
 
   function loginButtonClick(){
+    ReactGA.event({
+      category: "User Interaction",
+      action: "Clicked login button",
+      label: `User clicked login button`,
+  });
     show();
   }
 

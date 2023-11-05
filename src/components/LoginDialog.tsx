@@ -58,7 +58,7 @@ export default function LoginDialog({show, onHide}: LoginDialogProps){
                     category: "User Interaction",
                     action: "User Login",
                     label: `User logged in with email: ${email}`,
-                  });
+                });
                 storeJWT(jwt);
                 const loginInfo = getLoginInfoFromJWT(jwt);
                 setLoginInfo(loginInfo);
