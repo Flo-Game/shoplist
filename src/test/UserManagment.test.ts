@@ -50,7 +50,6 @@ describe("User Management Test", function () {
     assert.strictEqual(userFlo, true, "Der User Flo wurde nicht gefunden.");
   }, 20000);
 
-  /*
   it("create user", async function () {
     driver.findElement(By.id("addUserButton")).click();
     await driver.wait(until.elementLocated(By.id("addUserDialog")), 5000);
@@ -73,7 +72,7 @@ describe("User Management Test", function () {
     const userMax = await driver.findElement(By.id("user-Max")).isDisplayed();
     assert.strictEqual(userMax, true, "Der User Max wurde nicht gefunden.");
 
-    
+    /*
     //überprüfen im backend ob der user angelegt wurde
     const loginRessource = await login("john@some-host.de", "12abcAB!");
     const jwt = loginRessource.access_token;
@@ -102,11 +101,9 @@ describe("User Management Test", function () {
     } catch (err) {
       throw err;
     }
-    
+    */
   }, 10000);
-  */
 
-  /*
   it("edit user", async function (){
     const editButton = driver.findElement(By.id("editButton-Flo"));
     await editButton.click();
@@ -228,6 +225,7 @@ describe("User Management Test", function () {
 
     const usernameInput = await driver.findElement(By.id("inputUsername"));
     usernameInput.clear();
+    await driver.sleep(2000);
     await usernameInput.sendKeys("Flo");
 
     const emailInput = await driver.findElement(By.id("inputEmail"));
@@ -241,5 +239,4 @@ describe("User Management Test", function () {
     const userFlorianAdmin = await driver.findElement(By.id("user-Flo")).isDisplayed();
     assert.strictEqual(userFlorianAdmin, true, "Der User Flo wurde nicht gefunden.");
   },10000);
-  */
 });

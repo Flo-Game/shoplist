@@ -63,4 +63,31 @@ describe("Login Test", function () {
     const isErrorMessageVisible = await driver.findElement(By.id("errorMessage")).isDisplayed();
     assert.strictEqual(isErrorMessageVisible, true, "Falsche Anmeldeinformationen werden nicht erkannt.");
   },10000);
+
+  it("user cant see user management", async function () {
+    const loginButton = await driver.findElement(By.id("loginButton"));
+    await loginButton.click();
+    await driver.wait(until.elementLocated(By.id("loginDialog")), 5000);
+
+    // Überprüfe, ob der Dialog geöffnet wurde
+    const isDialogOpen = await driver.findElement(By.id("loginDialog")).isDisplayed();
+    assert.strictEqual(isDialogOpen, true, "Der Dialog wurde nicht geöffnet.");
+    
+    const inputMail = await driver.findElement(By.id("inputEmail"));
+    const inputPassword = await driver.findElement(By.id("inputPassword"));
+    await inputMail.sendKeys("flo@some-host.de");
+    await inputPassword.sendKeys("12abcAB!");
+
+    const okButton = await driver.findElement(By.id("okButton"));
+    await okButton.click();   
+
+    await driver.wait(until.elementLocated(By.id("logoutButton")), 5000);
+
+    const isLogoutButtonOpen = await driver.findElement(By.id("logoutButton")).isDisplayed();
+    assert.strictEqual(isLogoutButtonOpen, true, "Der Logout Button wird nicht angezeigt.");
+
+    //dont show user management
+    const UserManagmentLink = await driver.findElements(By.linkText("UserManagment"));
+    assert.strictEqual(UserManagmentLink.length, 0, "Der Link zu UserManagment sollte nicht sichtbar sein.");
+  }, 10000)
 });
