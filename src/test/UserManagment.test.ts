@@ -1,16 +1,17 @@
 import { Builder, By, WebDriver, until } from "selenium-webdriver";
 import assert from "assert";
 import chrome from "selenium-webdriver/chrome";
-import { UserResource, UsersResource } from "../Resources";
-import { login } from "../backend/shopperapi";
 
 describe("User Management Test", function () {
-  let driver: WebDriver;
+  let driver: WebDriver; 
+  let chromeOptions;
 
   beforeEach(async function () {
-    driver = await new Builder().forBrowser("chrome").setChromeOptions(new chrome.Options()).build();
-
+    chromeOptions = new chrome.Options;
+    chromeOptions.setAcceptInsecureCerts(false);
+    driver = await new Builder().forBrowser("chrome").setChromeOptions(chromeOptions).build();
     await driver.get(`http://localhost:3000`);
+    
     await driver.manage().window().maximize();
     const loginButton = await driver.findElement(By.id("loginButton"));
     await loginButton.click();
@@ -29,6 +30,7 @@ describe("User Management Test", function () {
     await okButton.click();
     await driver.wait(until.elementLocated(By.id("logoutButton")), 5000);
     const isLogoutButtonOpen = await driver.findElement(By.id("logoutButton")).isDisplayed();
+    driver.sleep(1000);
     assert.strictEqual(isLogoutButtonOpen, true, "Der Logout Button wird nicht angezeigt.");
 
     // click User Management
@@ -71,37 +73,6 @@ describe("User Management Test", function () {
     await driver.wait(until.elementLocated(By.id("user-Max")), 5000);
     const userMax = await driver.findElement(By.id("user-Max")).isDisplayed();
     assert.strictEqual(userMax, true, "Der User Max wurde nicht gefunden.");
-
-    /*
-    //überprüfen im backend ob der user angelegt wurde
-    const loginRessource = await login("john@some-host.de", "12abcAB!");
-    const jwt = loginRessource.access_token;
-    console.log(jwt);
-    const url = `http://localhost:3000/api/users`;
-
-    console.log("URL: " + url);
-
-    // eslint-disable-next-line no-useless-catch
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwt}`,
-        },
-        cache: `no-store`,
-      });
-
-      const users: UsersResource = await response.json();
-      expect(
-        users.users.some((user: UserResource) => {
-          return user.name === "TestUser" && user.email === "testuser@gmail.com" && user.admin == false;
-        })
-      ).toBeTruthy();
-    } catch (err) {
-      throw err;
-    }
-    */
   }, 10000);
 
   it("edit user", async function (){
@@ -192,6 +163,7 @@ describe("User Management Test", function () {
     await driver.wait(until.elementLocated(By.id("addUserDialog")), 5000);
 
     const isDialogOpen = await driver.findElement(By.id("addUserDialog")).isDisplayed();
+    driver.sleep(1500);
     assert.strictEqual(isDialogOpen, true, "Der Dialog wurde nicht geöffnet.");
 
     const inputUsername = await driver.findElement(By.id("inputUsername"));
@@ -219,6 +191,7 @@ describe("User Management Test", function () {
     await editButtonFlo.click();
     await driver.wait(until.elementLocated(By.id("editUserDialog")), 5000);
     const isDialogOpen = await driver.findElement(By.id("editUserDialog")).isDisplayed();
+    driver.sleep(1500);
     assert.strictEqual(isDialogOpen, true, "Der Dialog wurde nicht geöffnet.");
 
     await driver.sleep(2000); 

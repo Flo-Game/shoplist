@@ -1,0 +1,15 @@
+GET https://localhost:3001/api/shopper
+
+###
+# @name login
+POST https://localhost:3001/api/login
+content-type: application/json
+
+{
+    "email" : "john@some-host.de",
+    "password" : "12abcAB!"
+}
+
+
+###
+GET https://localhost:3001/api/users

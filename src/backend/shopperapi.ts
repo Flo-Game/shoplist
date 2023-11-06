@@ -32,6 +32,7 @@ export async function getShopper(): Promise<ShopperResource> {
         const data: ShopperResource = await fetchWithErrorHandling(url, {headers: headers()});
         return data;
     }catch(error){
+        console.error("Error: " + error);
         throw error;
     }
 }
